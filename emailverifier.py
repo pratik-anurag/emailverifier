@@ -6,6 +6,9 @@ fromAddress = 'panurag247365@gmail.com'
 regex = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$'
 
 def verify(addressToVerify):
+    resolver = dns.resolver.Resolver()
+    resolver.timeout = 6
+    resolver.lifetime = 6
     match = re.match(regex, addressToVerify)
     if match == None:
 	    print('Bad Syntax')
