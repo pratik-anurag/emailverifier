@@ -1,7 +1,8 @@
 import re
 import smtplib
 import dns.resolver
-
+server = smtplib.SMTP(timeout=6)
+server.set_debuglevel(0)
 fromAddress = 'panurag247365@gmail.com'
 regex = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$'
 
@@ -21,8 +22,6 @@ def verify(addressToVerify):
             records = dns.resolver.query(domain, 'MX')
             mxRecord = records[0].exchange
             mxRecord = str(mxRecord)
-            server = smtplib.SMTP()
-            server.set_debuglevel(0)
             server.connect(mxRecord)
             server.helo(server.local_hostname) 
             server.mail(fromAddress)
